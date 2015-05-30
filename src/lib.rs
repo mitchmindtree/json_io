@@ -51,11 +51,8 @@ pub fn load<T: Decodable>(path: &Path) -> Result<T, Error> {
         Ok(file) => file,
         Err(err) => {
             match err.kind() {
-                std::io::ErrorKind::NotFound => {
-                    let mut path = path.to_path_buf();
-                    path.set_extension("json");
-                    try!(File::open(&path).map_err(|err| Error::IO(err)))
-                },
+                std::io::ErrorKind::NotFound =>
+                    try!(File::open(&path.with_extension("json")).map_err(|err| Error::IO(err))),
                 _ => return Err(Error::IO(err)),
             }
         },
@@ -71,10 +68,8 @@ pub fn load<T: Decodable>(path: &Path) -> Result<T, Error> {
 /// Save an Encodable type to a JSON file at the given path.
 /// The file will be saved with the ".json" extension whether or not it was given with the Path.
 pub fn save<T: Encodable>(path: &Path, t: &T) -> Result<(), Error> {
-    let mut path = path.to_path_buf();
-    path.set_extension("json");
     let json_string = try!(json::encode(&t).map_err(|err| Error::JsonEncoderError(err)));
-    let mut file = try!(File::create(&path).map_err(|err| Error::IO(err)));
+    let mut file = try!(File::create(&path.with_extension("json")).map_err(|err| Error::IO(err)));
     io::Write::write_all(&mut file, json_string.as_bytes()).map_err(|err| Error::IO(err))
 }
 

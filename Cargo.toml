@@ -1,6 +1,6 @@
 [package]
 name = "json_io"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["mitchmindtree <mitchell.nordine@gmail.com>"]
 keywords = ["file", "json", "io", "load", "save"]
 description = "A tool for simplifying saving and loading serializable types to and from json files."
