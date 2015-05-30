@@ -1,0 +1,14 @@
+language: rust
+
+rust:
+    - stable
+    - nightly
+
+notifications:
+    irc: "irc.mozilla.org#piston-internals"
+
+script:
+    - cargo build --verbose
+    - cargo test --verbose
+    - cargo doc --verbose
+
