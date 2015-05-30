@@ -43,7 +43,7 @@ impl ::std::error::Error for Error {
 }
 
 
-/// Construct a Library from a JSON file.
+/// Construct a Decodable type from a JSON file at the given path.
 /// json_io will first try and open the file with the path exactly as given.
 /// If the file isn't found, it will set the extension to .json and try again.
 pub fn load<T: Decodable>(path: &Path) -> Result<T, Error> {
@@ -68,7 +68,7 @@ pub fn load<T: Decodable>(path: &Path) -> Result<T, Error> {
     T::decode(&mut decoder).map_err(|err| Error::JsonDecoderError(err))
 }
 
-/// Save a Library to a JSON file.
+/// Save an Encodable type to a JSON file at the given path.
 /// The file will be saved with the ".json" extension whether or not it was given with the Path.
 pub fn save<T: Encodable>(path: &Path, t: &T) -> Result<(), Error> {
     let mut path = path.to_path_buf();
