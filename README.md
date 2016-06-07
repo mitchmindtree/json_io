@@ -3,6 +3,10 @@
 
 A tool for simplifying saving and loading serializable types to and from json files.
 
+
+Supports either `rustc-serialize` (by default) or serde with the `--features="serde_serialization" --no-default-features` flags.
+
+
 It looks like this:
 
 ```Rust
@@ -28,5 +32,3 @@ You can add it to your project by adding this to your Cargo.toml:
 [dependencies]
 json_io = "*"
 ```
-
-

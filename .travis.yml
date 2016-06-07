@@ -10,5 +10,6 @@ notifications:
 script:
     - cargo build --verbose
     - cargo test --verbose
+    - cargo test --features="serde_serialization" --verbose
     - cargo doc --verbose
 
