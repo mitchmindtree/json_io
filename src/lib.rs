@@ -184,6 +184,7 @@ mod rustc_serialize {
     /// json_io will first try and open the file with the path exactly as given.
     ///
     /// If the file isn't found, it will set the extension to .json and try again.
+    #[deprecated(since="0.3.0", note="rustc-serialize has been deprecated - use serde instead")]
     pub fn load<T: Decodable>(path: &Path) -> Result<T, Error> {
         let mut file = match std::fs::File::open(&path) {
             Ok(file) => file,
@@ -204,6 +205,7 @@ mod rustc_serialize {
     /// Save an Encodable type to a JSON file at the given path.
     ///
     /// The file will be saved with the ".json" extension whether or not it was given with the Path.
+    #[deprecated(since="0.3.0", note="rustc-serialize has been deprecated - use serde instead")]
     pub fn save<T: Encodable>(path: &Path, t: &T) -> Result<(), Error> {
         let json_string = try!(json::encode(&t).map_err(|err| Error::JsonEncoderError(err)));
         let mut file = try!(File::create(&path.with_extension("json")).map_err(|err| Error::IO(err)));
